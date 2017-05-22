@@ -92,7 +92,7 @@ Table of contents
   
 **Log out**
 ----
-  Returns json data about active users.
+  Logs user out
 
 * **URL**
 
