@@ -12,7 +12,7 @@ import org.junit.ClassRule;
 import org.junit.Test;
 
 import si.lodrant.chitchat.App;
-import si.lodrant.chitchat.entities.CResponse;
+import si.lodrant.chitchat.entities.StandardResponse;
 
 /**
  * @author jooby generator

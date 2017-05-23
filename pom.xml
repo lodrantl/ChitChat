@@ -75,6 +75,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
+		<!-- quartz periodic jobs -->
+		<dependency>
+			<groupId>org.jooby</groupId>
+			<artifactId>jooby-quartz</artifactId>
+		</dependency>
+
 		<!-- Tests -->
 		<dependency>
 			<groupId>junit</groupId>

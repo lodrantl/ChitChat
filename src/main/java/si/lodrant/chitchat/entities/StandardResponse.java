@@ -4,18 +4,18 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CResponse {
+public class StandardResponse {
 	private String status;
 
-	public CResponse(String status) {
+	public StandardResponse(String status) {
 		super();
 		this.status = status;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj.getClass() == CResponse.class) {
-			return this.status.equals(((CResponse) obj).getStatus());
+		if (obj.getClass() == StandardResponse.class) {
+			return this.status.equals(((StandardResponse) obj).getStatus());
 		}
 		return false;
 	}
