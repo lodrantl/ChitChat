@@ -13,7 +13,8 @@ import org.junit.Test;
 import si.lodrant.chitchat.App;
 
 /**
- * @author Luka Lodrant, Lenart Treven Integration test suite for ChitChat
+ * @author Luka Lodrant
+ * @author Lenart Treven
  */
 public class AppTest {
 
@@ -300,5 +301,4 @@ public class AppTest {
 				.statusCode(400)
 				.contentType("application/json;charset=UTF-8");
 	}
-
 }
