@@ -271,7 +271,7 @@ public class AppTest {
 				.body("status", equalTo("User logged in"))
 				.statusCode(200)
 				.contentType("application/json;charset=UTF-8");
-		
+
 		given().body("{\"global\":false, \"recipient\":\"pac\", \"text\":\"bambam\"}")
 				.contentType("application/json")
 				.when()
@@ -291,13 +291,13 @@ public class AppTest {
 				.statusCode(401)
 				.contentType("application/json;charset=UTF-8");
 	}
-	
+
 	@Test
 	public void receiveMessagesWithoutName() {
 		get("/messages?username=").then()
 				.assertThat()
 				.body("status", equalTo(
-						"Bad Request(400): Cannot send messages if I do not know who you are (parameter missing)"))
+						"Bad Request(400): Cannot get messages if I do not know who you are (parameter missing)"))
 				.statusCode(400)
 				.contentType("application/json;charset=UTF-8");
 	}

@@ -148,7 +148,7 @@ public class App extends Jooby {
 					throw new Err(401, "You are not logged in.");
 				}
 			} else {
-				throw new Err(400, "Cannot delete you if I do not know who you are (parameter missing)");
+				throw new Err(400, "Cannot get messages if I do not know who you are (parameter missing)");
 			}
 		}).produces(MediaType.json);
 
