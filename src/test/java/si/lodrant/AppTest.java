@@ -252,4 +252,22 @@ public class AppTest {
 			.statusCode(200)
 			.contentType("application/json;charset=UTF-8");
 	}
+	@Test
+	public void receiveMessagesWithoutLogin() {
+		get("/messages?username=miki").then()
+			.assertThat()
+			.body("status", equalTo("Unauthorized(401): You are not logged in."))
+			.statusCode(401)
+			.contentType("application/json;charset=UTF-8");
+	}
+	
+	public void receiveMessagesWithoutName() {
+		get("/messages?username=").then()
+			.assertThat()
+			.body("status", equalTo("Bad Request(400): Cannot send messages if I do not know who you are (parameter missing)"))
+			.statusCode(400)
+			.contentType("application/json;charset=UTF-8");
+	}
+	
+	
 }
