@@ -27,3 +27,7 @@ hs_err_pid*
 .project
 
 /.settings
+/.factorypath
+/.README.md.html
+/1495527135275-create-all.sql
+/1495527135275-drop-all.sql

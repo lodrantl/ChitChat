@@ -1,13 +1,18 @@
 package si.lodrant;
 
 import static io.restassured.RestAssured.get;
+import static io.restassured.RestAssured.post;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertEquals;
 
 import org.jooby.test.JoobyRule;
 import org.jooby.test.MockRouter;
 import org.junit.ClassRule;
 import org.junit.Test;
+
+import si.lodrant.chitchat.App;
+import si.lodrant.chitchat.entities.CResponse;
 
 /**
  * @author jooby generator
@@ -22,21 +27,32 @@ public class AppTest {
   public static JoobyRule app = new JoobyRule(new App());
 
   @Test
-  public void integrationTest() {
-    get("/")
+  public void emptyTest() {
+    get("/users")
         .then()
         .assertThat()
-        .body(equalTo("Hello World!"))
+        .body(equalTo("[]"))
         .statusCode(200)
-        .contentType("text/html;charset=UTF-8");
+        .contentType("application/json;charset=UTF-8");
   }
-
+  
   @Test
-  public void unitTest() throws Throwable {
-    String result = new MockRouter(new App())
-        .get("/");
-
-    assertEquals("Hello World!", result);
+  public void addUser() {
+    post("/users?username=miki")
+        .then()
+        .assertThat()
+        .body("status", equalTo("User logged in"))
+        .statusCode(200)
+        .contentType("application/json;charset=UTF-8");
   }
-
+  
+  @Test
+  public void emptyTest2() {
+    get("/users")
+        .then()
+        .assertThat()
+        .body("[0].username", equalTo("miki"))
+        .statusCode(200)
+        .contentType("application/json;charset=UTF-8");
+  }
 }
