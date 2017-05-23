@@ -25,7 +25,6 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 package si.lodrant.chitchat;
 
 import java.nio.charset.Charset;
@@ -54,7 +53,8 @@ import si.lodrant.chitchat.entities.query.QMessage;
 import si.lodrant.chitchat.entities.query.QUser;
 
 /**
- * @author jooby generator
+ * @author Luka Lodrant, Lenart Treven
+ * Main application class
  */
 public class App extends Jooby {
 	final static Logger logger = LoggerFactory.getLogger(App.class);

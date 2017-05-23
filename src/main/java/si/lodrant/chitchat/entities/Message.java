@@ -27,8 +27,6 @@
  */
 package si.lodrant.chitchat.entities;
 
-import java.util.Optional;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -38,6 +36,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * @author Luka Lodrant, Lenart Treven
+ * Message entity for persistence and Jackson mapping
+ */
 @Entity
 @JsonInclude(Include.NON_EMPTY)
 public class Message {
