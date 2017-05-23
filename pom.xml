@@ -101,6 +101,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
+				<configuration>
+					<outputDirectory>${project.build.directory}/fatjar</outputDirectory>
+					<finalName>${project.build.finalName}-full</finalName>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
