@@ -53,8 +53,7 @@ import si.lodrant.chitchat.entities.query.QMessage;
 import si.lodrant.chitchat.entities.query.QUser;
 
 /**
- * @author Luka Lodrant, Lenart Treven
- * Main application class
+ * @author Luka Lodrant, Lenart Treven Main application class
  */
 public class App extends Jooby {
 	final static Logger logger = LoggerFactory.getLogger(App.class);
@@ -68,18 +67,21 @@ public class App extends Jooby {
 			conf.addClass(Message.class);
 			conf.addClass(User.class);
 		}));
-		
+
 		use(new Quartz(UserCleanJob.class));
-		
+
 		err((req, rsp, err) -> {
 			logger.error("Err thrown: ", err);
-			setupJson(rsp).status(err.statusCode()).send(new StandardResponse(err.getMessage()));
+			setupJson(rsp).status(err.statusCode())
+					.send(new StandardResponse(err.getMessage()));
 		});
 
 		get("/", (req, rsp) -> {
 			String message = "Welcome to the ChitChat server.\n"
-					+ "Let me be your guide: https://github.com/andrejbauer/ChitChat/";
-			rsp.status(200).type(MediaType.plain).send(message);
+					+ "Let me be your guide: https://github.com/andrejbauer/ChitChat/\n";
+			rsp.status(200)
+					.type(MediaType.plain)
+					.send(message);
 		}).produces(MediaType.plain);
 
 		get("/users", (req, rsp) -> {
@@ -87,102 +89,124 @@ public class App extends Jooby {
 
 			logger.info("Returning list of users");
 			List<User> users = new QUser().findList();
-			rsp.status(200).send(users);
+			rsp.status(200)
+					.send(users);
 		}).produces(MediaType.json);
 
 		post("/users", (req, rsp) -> {
 			setupJson(rsp);
 
-			String username = req.param("username").value();
+			String username = req.param("username")
+					.value();
 			logger.info(username);
 			logger.info("Logging in user {}", username);
 			if (!username.isEmpty()) {
 				EbeanServer ebean = require(EbeanServer.class);
-				List<User> users = new QUser().username.equalTo(username).findList();
+				List<User> users = new QUser().username.equalTo(username)
+						.findList();
 				if (users.size() > 0) {
 					throw new Err(403, "User already exists");
 				} else {
 					User user = new User(username, new Date());
 					ebean.save(user);
-					rsp.status(200).send(new StandardResponse("User logged in"));
+					rsp.status(200)
+							.send(new StandardResponse("User logged in"));
 				}
 			} else {
-				throw new Err(400, "Cannot log you in if I do not know who you are (parameter missing)");
+				throw new Err(400, "Parameter username is empty");
 			}
 		}).produces(MediaType.json);
 
 		delete("/users", (req, rsp) -> {
 			setupJson(rsp);
 
-			String username = req.param("username").value();
+			String username = req.param("username")
+					.value();
 			logger.info("Logging out user {}", username);
 			if (!username.isEmpty()) {
 				EbeanServer ebean = require(EbeanServer.class);
-				List<User> users = new QUser().username.equalTo(username).findList();
+				List<User> users = new QUser().username.equalTo(username)
+						.findList();
 				if (!users.isEmpty()) {
 					ebean.delete(users.get(0));
-					rsp.status(200).send(new StandardResponse("User logged out"));
+					rsp.status(200)
+							.send(new StandardResponse("User logged out"));
 				} else {
-					rsp.status(200).send(new StandardResponse("User didn't exist in the first place."));
+					rsp.status(200)
+							.send(new StandardResponse("User didn't exist in the first place."));
 				}
 			} else {
-				throw new Err(400, "Cannot delete you if I do not know who you are (parameter missing)");
+				throw new Err(400, "Parameter username is empty");
 			}
 		}).produces(MediaType.json);
 
 		get("/messages", (req, rsp) -> {
 			setupJson(rsp);
 
-			String username = req.param("username").value();
+			String username = req.param("username")
+					.value();
 			logger.info("Getting messages for user {}", username);
 			if (!username.isEmpty()) {
 				EbeanServer ebean = require(EbeanServer.class);
-				List<User> users = new QUser().username.equalTo(username).findList();
+				List<User> users = new QUser().username.equalTo(username)
+						.findList();
 				if (!users.isEmpty()) {
 					User user = users.get(0);
 					refreshUser(user, ebean);
-					List<Message> messages = new QMessage().recipient.equalTo(username).findList();
+					List<Message> messages = new QMessage().recipient.equalTo(username)
+							.findList();
+					
+					messages.sort((a, b) -> a.getSentAt().compareTo(b.getSentAt()));
+					
 					ebean.deleteAll(messages);
-					rsp.status(200).send(messages);
+					rsp.status(200)
+							.send(messages);
 				} else {
 					throw new Err(401, "You are not logged in.");
 				}
 			} else {
-				throw new Err(400, "Cannot get messages if I do not know who you are (parameter missing)");
+				throw new Err(400, "Parameter username is empty");
 			}
 		}).produces(MediaType.json);
 
 		post("/messages", (req, rsp) -> {
 			setupJson(rsp);
-			String username = req.param("username").value();
+			String username = req.param("username")
+					.value();
 			logger.info("Sending a message from {}", username);
 			Message message = req.body(Message.class);
 			if (!username.isEmpty()) {
 				EbeanServer ebean = require(EbeanServer.class);
-				List<User> senderList = new QUser().username.equalTo(username).findList();
+				List<User> senderList = new QUser().username.equalTo(username)
+						.findList();
 				if (!senderList.isEmpty()) {
 					refreshUser(senderList.get(0), ebean);
 					if (message.getGlobal()) {
 						List<User> active = new QUser().findList();
-						List<Message> messages = active.stream().filter(user -> username.equals(user.getUsername()))
+						List<Message> messages = active.stream()
+								.filter(user -> ! username.equals(user.getUsername()))
 								.map(user -> new Message(username, true, user.getUsername(), message.getText()))
 								.collect(Collectors.toList());
 						ebean.saveAll(messages);
 					} else {
-						if (message.getRecipient() == null || message.getRecipient().isEmpty()) {
+						if (message.getRecipient() == null || message.getRecipient()
+								.isEmpty()) {
 							throw new Err(400, "Cannot send a message without a recipient.");
 						}
 						message.setSender(username);
+						message.setSentAt(new Date());
 						ebean.save(message);
 					}
-					rsp.status(200).send(new StandardResponse("Message sent"));
+					rsp.status(200)
+							.send(new StandardResponse("Message sent"));
 				} else {
 					throw new Err(401, "You are not logged in.");
 				}
 			} else {
-				throw new Err(400, "Cannot send messages if I do not know who you are (parameter missing)");
+				throw new Err(400, "Parameter username is empty");
 			}
-		}).consumes(MediaType.json).produces(MediaType.json);
+		}).consumes(MediaType.json)
+				.produces(MediaType.json);
 	}
 
 	public static void main(final String[] args) {
@@ -190,7 +214,8 @@ public class App extends Jooby {
 	}
 
 	private static Response setupJson(Response r) {
-		return r.type(MediaType.json).charset(Charset.forName("UTF-8"));
+		return r.type(MediaType.json)
+				.charset(Charset.forName("UTF-8"));
 	}
 
 	private static void refreshUser(User user, EbeanServer es) {

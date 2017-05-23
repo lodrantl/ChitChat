@@ -27,6 +27,8 @@
  */
 package si.lodrant.chitchat.entities;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -52,13 +54,15 @@ public class Message {
 	private String recipient;
 	private String sender;
 	private String text;
-
+	private Date sentAt;
+	
 	public Message(String sender, boolean global, String recipient, String text) {
 		super();
 		this.global = global;
 		this.recipient = recipient;
 		this.text = text;
 		this.sender = sender;
+		this.sentAt = new Date();
 	}
 
 	@JsonProperty("global")
@@ -104,5 +108,14 @@ public class Message {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	@JsonProperty("sent_at")
+	public Date getSentAt() {
+		return sentAt;
+	}
+
+	public void setSentAt(Date sentAt) {
+		this.sentAt = sentAt;
 	}
 }
