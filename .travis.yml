@@ -10,6 +10,6 @@ deploy:
   secret_access_key:
     secure: HtKIYcujGZEemYL0H4Z2NMlJ0248jh2AWXT1KbwZET8US/mMjT49/vrat9QAPN//cuZms+/w4gZTU4t2lJVByLzyIzgAvjmiGVA2AJWK8ox14IIjdnI47pbrBzArH52awz7t5xme6YBn7rZWcygwmI4A7OaQ9NBuM0HoEqn/mQm2StpoAGcMTtB/SfVcERXeyvaf/tYPCC0hkmh14K/u8fKNYCDCKuzekF1lhqf2ypiDqvwV1Ht6wKPmsX9Pgq9RMNF7IXMB8UFve0aQiNDvWEq5nAwyFs6k69qInoHrTz1Uoi+0/Vmii2vR/hfJ9YJCfQpw/hHbTH9eyDjdZTNB3jE8YR+Wx7KJG5DZVPhbcqY4AHfgEH4tlLtzgkF8nLQvmxAFQ2BojzjdY69MjxjoROpBSgNEw8tfjWABSP9xF0YaN/CmqLN9jnQG/DmweluhWW7zJ6+dbC6joZlcc6dVlP73OhYwaxbnoDTgE1pWd7nqJ6LtF2oeBv5/i72wcIlFYSWRiJ+x68ahmnyd9ZbeKq+QWq4jP+X+rrvN75sV0IoxHkShq/eAWtE1gC7v+ibWHkfEiDyVax9f69puy7pVuwZyfHLRH7Dw3k+vHP5xgPAqvBVrziDPV6p65I31R0IR03F5Nr9KK8xfWAIbC/tPDFR+yvk1b9fpL+RC/jhfuQQ=
   bucket: chitchat-nightlies
-  local-dir: target/fatjar
+  local-dir: target/fatjar/
   on:
     repo: lodrantl/ChitChat
