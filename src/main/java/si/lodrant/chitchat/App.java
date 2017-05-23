@@ -154,7 +154,6 @@ public class App extends Jooby {
 
 		post("/messages", (req, rsp) -> {
 			setupJson(rsp);
-
 			String username = req.param("username").value();
 			logger.info("Sending a message from {}", username);
 			Message message = req.body(Message.class);
@@ -168,8 +167,11 @@ public class App extends Jooby {
 						List<Message> messages = active.stream().filter(user -> username.equals(user.getUsername()))
 								.map(user -> new Message(username, true, user.getUsername(), message.getText()))
 								.collect(Collectors.toList());
-						ebean.save(messages);
+						ebean.saveAll(messages);
 					} else {
+						if (message.getRecipient() == null || message.getRecipient().isEmpty()) {
+							throw new Err(400, "Cannot send a message without a recipient.");
+						}
 						message.setSender(username);
 						ebean.save(message);
 					}
