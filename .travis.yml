@@ -12,6 +12,7 @@ deploy:
   bucket: chitchat-nightlies
   local-dir: target/fatjar/
   skip_cleanup: true
+  acl: public_read
   on:
     repo: lodrantl/ChitChat
     branch: master
