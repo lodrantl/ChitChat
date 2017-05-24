@@ -139,7 +139,7 @@
 				<version>1.2.0</version>
 				<configuration>
 					<description>ChitChat server for use in Programiranje 2 projects</description>
-					<releaseName>v{project.version}</releaseName>
+					<releaseName>v${project.version}</releaseName>
 					<tag>${project.artifactId}-${project.version}</tag>
 				</configuration>
 			</plugin>
