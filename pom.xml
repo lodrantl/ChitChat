@@ -23,8 +23,7 @@
 		<!-- Startup class -->
 		<application.class>si.lodrant.chitchat.App</application.class>
 	</properties>
-	<dependencyManagement>
-	</dependencyManagement>
+	
 	<dependencies>
 		<!-- Server -->
 		<dependency>

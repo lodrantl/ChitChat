@@ -158,9 +158,9 @@ public class App extends Jooby {
 					
 					messages.sort((a, b) -> a.getSentAt().compareTo(b.getSentAt()));
 					
-					ebean.deleteAll(messages);
 					rsp.status(200)
 							.send(messages);
+					ebean.deleteAll(messages);
 				} else {
 					throw new Err(401, "You are not logged in.");
 				}

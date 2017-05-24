@@ -32,6 +32,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -53,6 +54,8 @@ public class Message {
 	private boolean global;
 	private String recipient;
 	private String sender;
+	
+	@Lob
 	private String text;
 	private Date sentAt;
 	
