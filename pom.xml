@@ -25,9 +25,9 @@
 	</properties>
 
 	<scm>
-		<connection>scm:git:file://.</connection>
-		<developerConnection>scm:git:file://.</developerConnection>
-		<url>scm:git:file://.</url>
+		<connection>scm:git:git@github.com:lodrantl/ChitChat.git</connection>
+		<developerConnection>scm:git:git@github.com:lodrantl/ChitChat.git</developerConnection>
+		<url>scm:git:git@github.com:lodrantl/ChitChat.git</url>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -117,7 +117,6 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<configuration>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
-					<localCheckout>true</localCheckout>
 				</configuration>
 			</plugin>
 		</plugins>
