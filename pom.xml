@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -12,7 +11,7 @@
 
 	<artifactId>chitchat</artifactId>
 	<groupId>si.lodrant.chitchat</groupId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.1.2-SNAPSHOT</version>
 
 	<name>ChitChat</name>
 	<description>Small java chat server</description>
@@ -23,7 +22,25 @@
 		<!-- Startup class -->
 		<application.class>si.lodrant.chitchat.App</application.class>
 	</properties>
-	
+
+	<scm>
+		<connection>scm:git:git@github.com:lodrantl/ChitChat.git</connection>
+		<developerConnection>scm:git:git@github.com:lodrantl/ChitChat.git</developerConnection>
+		<url>scm:git:git@github.com:lodrantl/ChitChat.git</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>bintray-cy6ergn0m-maven</id>
+			<name>bintray-plugins</name>
+			<url>http://dl.bintray.com/cy6ergn0m/maven</url>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<dependencies>
 		<!-- Server -->
 		<dependency>
@@ -100,10 +117,46 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
 				<configuration>
-					<outputDirectory>${project.build.directory}/fatjar</outputDirectory>
-					<finalName>${project.build.finalName}-full</finalName>
+					<skipStaging>true</skipStaging>
+					<skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
 				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>cy.github</groupId>
+				<artifactId>github-release-plugin</artifactId>
+				<configuration>
+					<tagName>${project.artifactId}-${project.version}</tagName>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>gh-upload</goal>
+						</goals>
+						<phase>deploy</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-scm-plugin</artifactId>
+						<version>1.9.5</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
