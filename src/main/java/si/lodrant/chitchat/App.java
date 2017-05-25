@@ -78,7 +78,7 @@ public class App extends Jooby {
 
 		get("/", (req, rsp) -> {
 			String message = "Welcome to the ChitChat server.\n"
-					+ "Let me be your guide: https://github.com/andrejbauer/ChitChat/\n";
+					+ "Let me be your guide: https://github.com/lodrantl/ChitChat/\n";
 			rsp.status(200)
 					.type(MediaType.plain)
 					.send(message);
