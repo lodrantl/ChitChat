@@ -53,10 +53,11 @@ import si.lodrant.chitchat.entities.query.QMessage;
 import si.lodrant.chitchat.entities.query.QUser;
 
 /**
- * @author Luka Lodrant, Lenart Treven Main application class
+ * @author Luka Lodrant
+ * @author Lenart Treven
  */
 public class App extends Jooby {
-	final static Logger logger = LoggerFactory.getLogger(App.class);
+	final Logger logger = LoggerFactory.getLogger(App.class);
 
 	{
 		use(new Jackson().doWith(mapper -> {

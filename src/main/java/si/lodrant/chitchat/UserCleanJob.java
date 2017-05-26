@@ -45,11 +45,11 @@ import si.lodrant.chitchat.entities.User;
 import si.lodrant.chitchat.entities.query.QUser;
 
 /**
- * @author Luka Lodrant, Lenart Treven
- * Cron job to clean out expired users
+ * @author Luka Lodrant
+ * @author Lenart Treven
  */
 public class UserCleanJob implements Job {
-	final static Logger logger = LoggerFactory.getLogger(App.class);
+	final Logger logger = LoggerFactory.getLogger(App.class);
 	
 	@Inject
 	private EbeanServer ebean;

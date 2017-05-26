@@ -32,8 +32,8 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * @author Luka Lodrant, Lenart Treven
- * POJO for standard JSON response wrapping
+ * @author Luka Lodrant
+ * @author Lenart Treven
  */
 public class StandardResponse {
 	private String status;

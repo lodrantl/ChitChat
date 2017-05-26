@@ -37,8 +37,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * @author Luka Lodrant, Lenart Treven
- * User entity for persistence and Jackson mapping
+ * @author Luka Lodrant
+ * @author Lenart Treven
  */
 @Entity
 public class User {

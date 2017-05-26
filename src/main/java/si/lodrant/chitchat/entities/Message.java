@@ -40,8 +40,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * @author Luka Lodrant, Lenart Treven
- * Message entity for persistence and Jackson mapping
+ * @author Luka Lodrant
+ * @author Lenart Treven
  */
 @Entity
 @JsonInclude(Include.NON_EMPTY)
