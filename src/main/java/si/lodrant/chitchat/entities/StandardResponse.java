@@ -1,19 +1,19 @@
 /**
  * BSD 2-Clause License
- *
+ * <p>
  * Copyright (c) 2017, Luka Lodrant, Lenart Treven
  * All rights reserved.
- *
+ * <p>
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- *
+ * <p>
  * * Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- *
+ * list of conditions and the following disclaimer.
+ * <p>
  * * Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
- *
+ * this list of conditions and the following disclaimer in the documentation
+ * and/or other materials provided with the distribution.
+ * <p>
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -27,41 +27,37 @@
  */
 package si.lodrant.chitchat.entities;
 
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * @author Luka Lodrant
- * @author Lenart Treven
- */
+import java.util.Objects;
+
 public class StandardResponse {
-	private String status;
+    private String status;
 
-	public StandardResponse(String status) {
-		super();
-		this.status = status;
-	}
+    public StandardResponse(String status) {
+        super();
+        this.status = status;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj.getClass() == StandardResponse.class) {
-			return this.status.equals(((StandardResponse) obj).getStatus());
-		}
-		return false;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() == StandardResponse.class) {
+            return this.status.equals(((StandardResponse) obj).getStatus());
+        }
+        return false;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(this.status);
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.status);
+    }
 
-	@JsonProperty("status")
-	public String getStatus() {
-		return status;
-	}
+    @JsonProperty("status")
+    public String getStatus() {
+        return status;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

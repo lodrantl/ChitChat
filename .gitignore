@@ -33,3 +33,5 @@ hs_err_pid*
 
 /*.sql
 
+.idea/
+chitchat.iml

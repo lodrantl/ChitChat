@@ -1,19 +1,19 @@
 /**
  * BSD 2-Clause License
- *
+ * <p>
  * Copyright (c) 2017, Luka Lodrant, Lenart Treven
  * All rights reserved.
- *
+ * <p>
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- *
+ * <p>
  * * Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- *
+ * list of conditions and the following disclaimer.
+ * <p>
  * * Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
- *
+ * this list of conditions and the following disclaimer in the documentation
+ * and/or other materials provided with the distribution.
+ * <p>
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -27,60 +27,60 @@
  */
 package si.lodrant.chitchat.entities;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.ebean.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-/**
- * @author Luka Lodrant
- * @author Lenart Treven
- */
 @Entity
-public class User {
+public class User extends Model {
 
-	@Id
-	@GeneratedValue
-	private int id;
+    @Id
+    @GeneratedValue
+    private int id;
 
-	private String username;
-	private Date lastActive;
-	
-	public User(String username, Date lastActive) {
-		super();
-		this.username = username;
-		this.lastActive = lastActive;
-	}
+    private String username;
+    private Date lastActive;
 
-	@JsonProperty("username")
-	public String getUsername() {
-		return username;
-	}
+    public User(String username, Date lastActive) {
+        super();
+        this.username = username;
+        this.lastActive = lastActive;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    @JsonProperty("username")
+    public String getUsername() {
+        return username;
+    }
 
-	@JsonProperty("last_active")
-	public Date getLastActive() {
-		return lastActive;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setLastActive(Date lastActive) {
-		this.lastActive = lastActive;
-	}
+    @JsonProperty("last_active")
+    public Date getLastActive() {
+        return lastActive;
+    }
 
-	@JsonIgnore
-	public int getId() {
-		return id;
-	}
+    public void setLastActive(Date lastActive) {
+        this.lastActive = lastActive;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
-	
+    @JsonIgnore
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void refresh() {
+        setLastActive(new Date());
+        save();
+    }
 }

@@ -49,11 +49,11 @@ All dates are formated in ISO8601 date format (https://en.wikipedia.org/wiki/ISO
 
   * **Code:** 200 <br />
     **Content:** 
-    ```javascript
+    ```json
 	[
 		{
-			"username": "miki",
-			"last_active": "2017-05-25T11:01:02Z"
+			"username" : "miki",
+			"last_active" : "2017-05-25T11:01:02Z"
 		},
 		{
 			"username": "pluto",
@@ -65,14 +65,12 @@ All dates are formated in ISO8601 date format (https://en.wikipedia.org/wiki/ISO
  
 * **Sample Call:**
 
-  ```javascript
-    $.ajax({
-      url: "/users",
-      dataType: "json",
-      type : "GET",
-      success : function(r) {
-        console.log(r);
-      }
+  ```java
+    String responseBody = Request.Get("http://chitchat.andrej.com/users")
+                          .execute()
+                          .returnContent()
+                          .asString();
+    System.out.println(responseBody);
     });
     ```
  
@@ -111,14 +109,15 @@ All dates are formated in ISO8601 date format (https://en.wikipedia.org/wiki/ISO
 
 * **Sample Call:**
 
-  ```javascript
-    $.ajax({
-      url: "/users?username=miki",
-      dataType: "json",
-      type : "POST",
-      success : function(r) {
-        console.log(r);
-      }
+  ```java
+    URI uri = new URIBuilder("http://chitchat.andrej.com/users")
+            .addParameter("username", "miki")
+            .build();
+
+    String responseBody = Request.Post(uri)
+                                 .execute()
+                                 .returnContent()
+                                 .asString();
     });
   ```
   
@@ -152,14 +151,15 @@ All dates are formated in ISO8601 date format (https://en.wikipedia.org/wiki/ISO
  
 * **Sample Call:**
 
-  ```javascript
-    $.ajax({
-      url: "/users?username=miki",
-      dataType: "json",
-      type : "DELETE",
-      success : function(r) {
-        console.log(r);
-      }
+  ```java
+    URI uri = new URIBuilder("http://chitchat.andrej.com/users")
+            .addParameter("username", "miki")
+            .build();
+
+    String responseBody = Request.Delete(uri)
+                                 .execute()
+                                 .returnContent()
+                                 .asString();
     });
   ```
 
@@ -189,7 +189,7 @@ All dates are formated in ISO8601 date format (https://en.wikipedia.org/wiki/ISO
 
   * **Code:** 200 <br />
     **Content (array is sorted by sent_at):** 
-    ```javascript
+    ```json
     [
   		{
     		"global" : false,
@@ -216,14 +216,15 @@ All dates are formated in ISO8601 date format (https://en.wikipedia.org/wiki/ISO
 
 * **Sample Call:**
 
-  ```javascript
-    $.ajax({
-      url: "/messages?username=miki",
-      dataType: "json",
-      type : "GET",
-      success : function(r) {
-        console.log(r);
-      }
+  ```java
+    URI uri = new URIBuilder("http://chitchat.andrej.com/messages")
+            .addParameter("username", "miki")
+            .build();
+
+    String responseBody = Request.Get(uri)
+                                 .execute()
+                                 .returnContent()
+                                 .asString();
     });
   ```
 
@@ -247,7 +248,7 @@ All dates are formated in ISO8601 date format (https://en.wikipedia.org/wiki/ISO
 
 * **Data Params**
 	
-	```javascript
+	```json
 	{
 		"global" : false,
 		"recipient" : "pluto",
@@ -257,7 +258,7 @@ All dates are formated in ISO8601 date format (https://en.wikipedia.org/wiki/ISO
 	
 	OR
 	
-	```javascript
+	```json
 	{
 		"global" : true,
 		"text" : "Hi everybody!"
@@ -277,19 +278,17 @@ All dates are formated in ISO8601 date format (https://en.wikipedia.org/wiki/ISO
 
 * **Sample Call:**
 
-  ```javascript
-	var message = {
-		"global" : true,
-		"text" : "Hi everybody!"
-	};
-	
-    $.ajax({
-      url: "/messages?username=miki",
-      dataType: "json",
-      data: message,
-      type : "POST",
-      success : function(r) {
-        console.log(r);
-      }
+  ```java
+    URI uri = new URIBuilder("http://chitchat.andrej.com/messages")
+            .addParameter("username", "miki")
+            .build();
+
+    String message = "{ \"global\" : true, \"text\" : \"Hi everybody!\"  }";
+
+    String responseBody = Request.Post(uri)
+            .bodyString(message, ContentType.APPLICATION_JSON)
+            .execute()
+            .returnContent()
+            .asString();
     });
   ```

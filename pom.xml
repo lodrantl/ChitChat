@@ -62,12 +62,6 @@
 
 		<dependency>
 			<groupId>io.ebean</groupId>
-			<artifactId>ebean-querybean</artifactId>
-			<version>10.2.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.ebean</groupId>
 			<artifactId>querybean-generator</artifactId>
 			<version>10.1.2</version>
 			<scope>provided</scope>

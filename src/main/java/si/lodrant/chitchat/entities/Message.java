@@ -1,19 +1,19 @@
 /**
  * BSD 2-Clause License
- *
+ * <p>
  * Copyright (c) 2017, Luka Lodrant, Lenart Treven
  * All rights reserved.
- *
+ * <p>
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- *
+ * <p>
  * * Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- *
+ * list of conditions and the following disclaimer.
+ * <p>
  * * Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
- *
+ * this list of conditions and the following disclaimer in the documentation
+ * and/or other materials provided with the distribution.
+ * <p>
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -27,98 +27,95 @@
  */
 package si.lodrant.chitchat.entities;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.ebean.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-/**
- * @author Luka Lodrant
- * @author Lenart Treven
- */
 @Entity
 @JsonInclude(Include.NON_EMPTY)
-public class Message {
+public class Message extends Model {
 
-	@Id
-	@GeneratedValue
-	private int id;
 
-	private boolean global;
-	private String recipient;
-	private String sender;
-	
-	@Lob
-	private String text;
-	private Date sentAt;
-	
-	public Message(String sender, boolean global, String recipient, String text) {
-		super();
-		this.global = global;
-		this.recipient = recipient;
-		this.text = text;
-		this.sender = sender;
-		this.sentAt = new Date();
-	}
+    @Id
+    @GeneratedValue
+    private int id;
 
-	@JsonProperty("global")
-	public boolean getGlobal() {
-		return global;
-	}
+    private boolean global;
+    private String recipient;
+    private String sender;
 
-	@JsonProperty("sender")
-	public String getSender() {
-		return sender;
-	}
+    @Lob
+    private String text;
+    private Date sentAt;
 
-	public void setSender(String sender) {
-		this.sender = sender;
-	}
+    public Message(String sender, boolean global, String recipient, String text) {
+        super();
+        this.global = global;
+        this.recipient = recipient;
+        this.text = text;
+        this.sender = sender;
+        this.sentAt = new Date();
+    }
 
-	public void setGlobal(boolean global) {
-		this.global = global;
-	}
+    @JsonProperty("global")
+    public boolean getGlobal() {
+        return global;
+    }
 
-	@JsonProperty("recipient")
-	public String getRecipient() {
-		return recipient;
-	}
+    @JsonProperty("sender")
+    public String getSender() {
+        return sender;
+    }
 
-	public void setRecipient(String recipient) {
-		this.recipient = recipient;
-	}
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
 
-	@JsonProperty("text")
-	public String getText() {
-		return text;
-	}
+    public void setGlobal(boolean global) {
+        this.global = global;
+    }
 
-	public void setText(String text) {
-		this.text = text;
-	}
+    @JsonProperty("recipient")
+    public String getRecipient() {
+        return recipient;
+    }
 
-	@JsonIgnore
-	public int getId() {
-		return id;
-	}
+    public void setRecipient(String recipient) {
+        this.recipient = recipient;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	@JsonProperty("sent_at")
-	public Date getSentAt() {
-		return sentAt;
-	}
+    @JsonProperty("text")
+    public String getText() {
+        return text;
+    }
 
-	public void setSentAt(Date sentAt) {
-		this.sentAt = sentAt;
-	}
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    @JsonIgnore
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @JsonProperty("sent_at")
+    public Date getSentAt() {
+        return sentAt;
+    }
+
+    public void setSentAt(Date sentAt) {
+        this.sentAt = sentAt;
+    }
 }
