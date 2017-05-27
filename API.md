@@ -70,8 +70,8 @@ All dates are formated in ISO8601 date format (https://en.wikipedia.org/wiki/ISO
                           .execute()
                           .returnContent()
                           .asString();
+
     System.out.println(responseBody);
-    });
     ```
  
 **Log in**
@@ -118,7 +118,8 @@ All dates are formated in ISO8601 date format (https://en.wikipedia.org/wiki/ISO
                                  .execute()
                                  .returnContent()
                                  .asString();
-    });
+
+    System.out.println(responseBody);
   ```
   
 **Log out**
@@ -160,7 +161,8 @@ All dates are formated in ISO8601 date format (https://en.wikipedia.org/wiki/ISO
                                  .execute()
                                  .returnContent()
                                  .asString();
-    });
+
+    System.out.println(responseBody);
   ```
 
 **Receive messages**
@@ -225,7 +227,8 @@ All dates are formated in ISO8601 date format (https://en.wikipedia.org/wiki/ISO
                                  .execute()
                                  .returnContent()
                                  .asString();
-    });
+
+    System.out.println(responseBody);
   ```
 
 **Send message**
@@ -290,5 +293,6 @@ All dates are formated in ISO8601 date format (https://en.wikipedia.org/wiki/ISO
             .execute()
             .returnContent()
             .asString();
-    });
+
+    System.out.println(responseBody);
   ```
