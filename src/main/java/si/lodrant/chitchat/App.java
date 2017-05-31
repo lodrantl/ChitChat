@@ -1,19 +1,19 @@
 /**
  * BSD 2-Clause License
- * <p>
+ *
  * Copyright (c) 2017, Luka Lodrant, Lenart Treven
  * All rights reserved.
- * <p>
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * <p>
+ *
  * * Redistributions of source code must retain the above copyright notice, this
- * list of conditions and the following disclaimer.
- * <p>
+ *   list of conditions and the following disclaimer.
+ *
  * * Redistributions in binary form must reproduce the above copyright notice,
- * this list of conditions and the following disclaimer in the documentation
- * and/or other materials provided with the distribution.
- * <p>
+ *   this list of conditions and the following disclaimer in the documentation
+ *   and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -96,12 +96,12 @@ public class App extends Jooby {
 
             String username = req.param("username")
                     .value();
-            logger.info(username);
             logger.info("Logging in user {}", username);
             if (!username.isEmpty()) {
                 EbeanServer ebean = require(EbeanServer.class);
                 List<User> users = new QUser().username.equalTo(username)
                         .findList();
+
                 if (users.size() > 0) {
                     throw new Err(403, "User already exists");
                 } else {
@@ -126,6 +126,7 @@ public class App extends Jooby {
                 EbeanServer ebean = require(EbeanServer.class);
                 List<User> users = new QUser().username.equalTo(username)
                         .findList();
+
                 if (!users.isEmpty()) {
                     ebean.delete(users.get(0));
                     rsp.status(200)

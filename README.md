@@ -11,5 +11,20 @@ Za testiranje lahko iz tega GitHub repozitorija (zavihek releases) prenesete jar
 
 Server bo potem dosegljiv na: http://localhost:8080
 
+V računalniški učilnici smo na vajah ugotovili, da imamo probleme z cachem zahtevkov. Nekdo na poti od naših računalnikov do strežnika si zahteveh zapomne in nam vrne stare podatke. Ukanemo ga lahko tako, da vsakemu zahtevku v url dodamo trenutni čas v ms kot nek neuporaben parameter.
+```java
+String time = Long.toString(new Date().getTime());
+
+URI uri = new URIBuilder("http://chitchat.andrej.com/users")
+        .addParameter("stop_cache", time)
+        .build();
+
+String responseBody = Request.Get(uri)
+                             .execute()
+                             .returnContent()
+                             .asString();
+
+System.out.println(responseBody);
+```
 
 #### [Dokumentacija vmesnika](./API.md)
